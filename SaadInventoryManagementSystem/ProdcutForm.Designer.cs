@@ -29,20 +29,29 @@ namespace SaadInventoryManagementSystem
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ProductNametextBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox1Category = new System.Windows.Forms.ComboBox();
+            this.QuantiytextBox2 = new System.Windows.Forms.TextBox();
+            this.PricetextBox3 = new System.Windows.Forms.TextBox();
+            this.Savebutton = new System.Windows.Forms.Button();
+            this.Updatebutton = new System.Windows.Forms.Button();
+            this.Deletebutton = new System.Windows.Forms.Button();
+            this.Clearbutton = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.chkShowDeleted = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // ProductNametextBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(219, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(178, 20);
-            this.textBox1.TabIndex = 0;
+            this.ProductNametextBox1.Location = new System.Drawing.Point(219, 45);
+            this.ProductNametextBox1.Name = "ProductNametextBox1";
+            this.ProductNametextBox1.Size = new System.Drawing.Size(178, 20);
+            this.ProductNametextBox1.TabIndex = 0;
             // 
             // label1
             // 
@@ -84,28 +93,106 @@ namespace SaadInventoryManagementSystem
             this.label4.TabIndex = 4;
             this.label4.Text = "Price :";
             // 
-            // comboBox1
+            // comboBox1Category
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(219, 90);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(178, 21);
-            this.comboBox1.TabIndex = 5;
+            this.comboBox1Category.FormattingEnabled = true;
+            this.comboBox1Category.Location = new System.Drawing.Point(219, 90);
+            this.comboBox1Category.Name = "comboBox1Category";
+            this.comboBox1Category.Size = new System.Drawing.Size(155, 21);
+            this.comboBox1Category.TabIndex = 5;
+            // 
+            // QuantiytextBox2
+            // 
+            this.QuantiytextBox2.Location = new System.Drawing.Point(219, 142);
+            this.QuantiytextBox2.Name = "QuantiytextBox2";
+            this.QuantiytextBox2.Size = new System.Drawing.Size(68, 20);
+            this.QuantiytextBox2.TabIndex = 6;
+            // 
+            // PricetextBox3
+            // 
+            this.PricetextBox3.Location = new System.Drawing.Point(219, 184);
+            this.PricetextBox3.Name = "PricetextBox3";
+            this.PricetextBox3.Size = new System.Drawing.Size(111, 20);
+            this.PricetextBox3.TabIndex = 7;
+            // 
+            // Savebutton
+            // 
+            this.Savebutton.Location = new System.Drawing.Point(103, 226);
+            this.Savebutton.Name = "Savebutton";
+            this.Savebutton.Size = new System.Drawing.Size(75, 31);
+            this.Savebutton.TabIndex = 8;
+            this.Savebutton.Text = "Save";
+            this.Savebutton.UseVisualStyleBackColor = true;
+            // 
+            // Updatebutton
+            // 
+            this.Updatebutton.Location = new System.Drawing.Point(200, 226);
+            this.Updatebutton.Name = "Updatebutton";
+            this.Updatebutton.Size = new System.Drawing.Size(75, 31);
+            this.Updatebutton.TabIndex = 9;
+            this.Updatebutton.Text = "Update";
+            this.Updatebutton.UseVisualStyleBackColor = true;
+            // 
+            // Deletebutton
+            // 
+            this.Deletebutton.Location = new System.Drawing.Point(299, 226);
+            this.Deletebutton.Name = "Deletebutton";
+            this.Deletebutton.Size = new System.Drawing.Size(75, 31);
+            this.Deletebutton.TabIndex = 10;
+            this.Deletebutton.Text = "Delete";
+            this.Deletebutton.UseVisualStyleBackColor = true;
+            // 
+            // Clearbutton
+            // 
+            this.Clearbutton.Location = new System.Drawing.Point(398, 226);
+            this.Clearbutton.Name = "Clearbutton";
+            this.Clearbutton.Size = new System.Drawing.Size(75, 31);
+            this.Clearbutton.TabIndex = 11;
+            this.Clearbutton.Text = "Clear";
+            this.Clearbutton.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(103, 307);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(393, 263);
+            this.dataGridView1.TabIndex = 12;
+            // 
+            // chkShowDeleted
+            // 
+            this.chkShowDeleted.AutoSize = true;
+            this.chkShowDeleted.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkShowDeleted.Location = new System.Drawing.Point(103, 281);
+            this.chkShowDeleted.Name = "chkShowDeleted";
+            this.chkShowDeleted.Size = new System.Drawing.Size(111, 20);
+            this.chkShowDeleted.TabIndex = 13;
+            this.chkShowDeleted.Text = "Show Deleted";
+            this.chkShowDeleted.UseVisualStyleBackColor = true;
             // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(906, 514);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(906, 585);
+            this.Controls.Add(this.chkShowDeleted);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.Clearbutton);
+            this.Controls.Add(this.Deletebutton);
+            this.Controls.Add(this.Updatebutton);
+            this.Controls.Add(this.Savebutton);
+            this.Controls.Add(this.PricetextBox3);
+            this.Controls.Add(this.QuantiytextBox2);
+            this.Controls.Add(this.comboBox1Category);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.ProductNametextBox1);
             this.Name = "ProductForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProductForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,11 +200,19 @@ namespace SaadInventoryManagementSystem
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox ProductNametextBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox1Category;
+        private System.Windows.Forms.TextBox QuantiytextBox2;
+        private System.Windows.Forms.TextBox PricetextBox3;
+        private System.Windows.Forms.Button Savebutton;
+        private System.Windows.Forms.Button Updatebutton;
+        private System.Windows.Forms.Button Deletebutton;
+        private System.Windows.Forms.Button Clearbutton;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.CheckBox chkShowDeleted;
     }
 }

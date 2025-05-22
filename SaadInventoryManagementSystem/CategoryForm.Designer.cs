@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace SaadInventoryManagementSystem
 {
     partial class CategoryForm
@@ -29,10 +31,10 @@ namespace SaadInventoryManagementSystem
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.CategoryNametextBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.DescriptiontextBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -42,12 +44,13 @@ namespace SaadInventoryManagementSystem
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // CategoryNametextBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(236, 50);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(167, 20);
-            this.textBox1.TabIndex = 0;
+            this.CategoryNametextBox1.Location = new System.Drawing.Point(236, 50);
+            this.CategoryNametextBox1.Name = "CategoryNametextBox1";
+            this.CategoryNametextBox1.Size = new System.Drawing.Size(167, 20);
+            this.CategoryNametextBox1.TabIndex = 0;
+            this.CategoryNametextBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -69,13 +72,14 @@ namespace SaadInventoryManagementSystem
             this.label2.TabIndex = 2;
             this.label2.Text = "Description :";
             // 
-            // textBox2
+            // DescriptiontextBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(236, 97);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(167, 20);
-            this.textBox2.TabIndex = 3;
+            this.DescriptiontextBox2.Location = new System.Drawing.Point(236, 97);
+            this.DescriptiontextBox2.Multiline = true;
+            this.DescriptiontextBox2.Name = "DescriptiontextBox2";
+            this.DescriptiontextBox2.Size = new System.Drawing.Size(167, 20);
+            this.DescriptiontextBox2.TabIndex = 3;
+            this.DescriptiontextBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
             // 
@@ -85,6 +89,7 @@ namespace SaadInventoryManagementSystem
             this.button1.TabIndex = 4;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -94,6 +99,7 @@ namespace SaadInventoryManagementSystem
             this.button2.TabIndex = 5;
             this.button2.Text = "Update";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -103,6 +109,7 @@ namespace SaadInventoryManagementSystem
             this.button3.TabIndex = 6;
             this.button3.Text = "Delete";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -112,22 +119,23 @@ namespace SaadInventoryManagementSystem
             this.button4.TabIndex = 7;
             this.button4.Text = "Clear";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(102, 270);
+            this.dataGridView1.Location = new System.Drawing.Point(102, 240);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(383, 263);
+            this.dataGridView1.Size = new System.Drawing.Size(383, 281);
             this.dataGridView1.TabIndex = 8;
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(102, 220);
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox2.Location = new System.Drawing.Point(102, 205);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(131, 20);
+            this.checkBox2.Size = new System.Drawing.Size(117, 20);
             this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "Show Deleted  ";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -143,10 +151,10 @@ namespace SaadInventoryManagementSystem
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.DescriptiontextBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.CategoryNametextBox1);
             this.Name = "CategoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CategoryForm";
@@ -156,12 +164,42 @@ namespace SaadInventoryManagementSystem
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox CategoryNametextBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox DescriptiontextBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
