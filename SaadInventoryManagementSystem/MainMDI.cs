@@ -14,10 +14,6 @@ namespace SaadInventoryManagementSystem
 {
     public partial class MainMDI : Form
     {
-        SqlConnection con = new SqlConnection();
-        SqlCommand cmd = new SqlCommand();
-        SqlDataAdapter da = new SqlDataAdapter();
-        DataTable dt = new DataTable();
         public MainMDI()
         {
             InitializeComponent();

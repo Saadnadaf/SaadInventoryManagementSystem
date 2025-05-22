@@ -53,12 +53,6 @@
     <Compile Include="CategoriesForm.Designer.cs">
       <DependentUpon>CategoriesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CategoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CategoryForm.Designer.cs">
-      <DependentUpon>CategoryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainMDI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,9 +69,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CategoriesForm.resx">
       <DependentUpon>CategoriesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CategoryForm.resx">
-      <DependentUpon>CategoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMDI.resx">
       <DependentUpon>MainMDI.cs</DependentUpon>
@@ -106,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data_Access_Layer\Data_Access_Layer.csproj">
+      <Project>{987ec739-24a9-466d-bc1e-952df784e70e}</Project>
+      <Name>Data_Access_Layer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
