@@ -36,12 +36,14 @@ namespace Data_Access_Layer
             try
             {
                 connect();
-                SqlCommand cmd = new SqlCommand(" SP_Categories_Insert", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
-                cmd.Parameters.AddWithValue("@Description", Description);
-                int result = cmd.ExecuteNonQuery();
-                return result;
+                using (SqlCommand cmd = new SqlCommand(" SP_Categories_Insert", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
+                    cmd.Parameters.AddWithValue("@Description", Description);
+                    int result = cmd.ExecuteNonQuery();
+                    return result;
+                }
             }
             catch(Exception ex)
             {
@@ -60,14 +62,17 @@ namespace Data_Access_Layer
             try
             {
                 connect();
-                SqlCommand cmd = new SqlCommand("Sp_categories_Update", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
-                cmd.Parameters.AddWithValue("@Description", Description);
-                cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
-                cmd.Parameters.AddWithValue("@Isactive", Isactive);
-                int result = cmd.ExecuteNonQuery();
-                return result;
+
+                using (SqlCommand cmd = new SqlCommand("Sp_categories_Update", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
+                    cmd.Parameters.AddWithValue("@Description", Description);
+                    cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
+                    cmd.Parameters.AddWithValue("@Isactive", Isactive);
+                    int result = cmd.ExecuteNonQuery();
+                    return result;
+                }
             }
             catch (Exception ex)
             {
@@ -82,12 +87,15 @@ namespace Data_Access_Layer
         {
             try
             {
-                    connect();
-                    SqlCommand cmd = new SqlCommand("Sp_categories_Delete", con);
+                connect();
+                using (SqlCommand cmd = new SqlCommand("Sp_categories_Delete", con))
+                {
+
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
                     int result = cmd.ExecuteNonQuery();
                     return result;
+                }
             }
             catch (Exception ex)
             {
@@ -101,22 +109,26 @@ namespace Data_Access_Layer
 
         }
 
-        public DataTable ViewCategory()
+        public DataTable ViewCategory(bool showDeleted)
         {
             try
             {
                 connect();
-                SqlCommand cmd = new SqlCommand("SP_Categories_ViewAllCategories", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
+                using (SqlCommand cmd = new SqlCommand("SP_Categories_ViewAllCategories", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ShowDeleted", showDeleted);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception("Error while Fetching" + ex.Message.ToString());
             }
+
             finally
             {
                 con.Close();
