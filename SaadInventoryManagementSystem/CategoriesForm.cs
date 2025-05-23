@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Data_Access_Layer;
+using Business_Layer;
+using Property_Layer;
 
 namespace SaadInventoryManagementSystem
 {
@@ -18,44 +20,148 @@ namespace SaadInventoryManagementSystem
             InitializeComponent();
         }
 
-        private void CategoryNametextBox1_TextChanged(object sender, EventArgs e)
-        {
+        private void CategoryNametextBox1_TextChanged(object sender, EventArgs e) { }
 
-        }
+        private void DescriptiontextBox2_TextChanged(object sender, EventArgs e) { }
 
-        private void DescriptiontextBox2_TextChanged(object sender, EventArgs e)
-        {
+        private void CategoryIDtextBox3_TextChanged(object sender, EventArgs e) { }
 
-        }
-
-        private void CategoryIDtextBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        CategoryBLL bll = new CategoryBLL();
         private void Savebutton_Click(object sender, EventArgs e)
         {
+            if (!validatecategoryform())
+            {
+                return;
+            }
 
+            CategoryfrmProperties cf = new CategoryfrmProperties
+            {
+                CategoryName = CategoryNametextBox1.Text.Trim(),
+                Description = DescriptiontextBox2.Text.Trim()
+            };
+            int result = bll.InsertCategoryBLL(cf);
+            if (result > 0)
+            {
+                MessageBox.Show("Category saved successfully");
+                loadcategories();
+                clearform();
+            }
+            else if (result == -2)
+            {
+                MessageBox.Show("Category already exists");
+            }
+            else
+            {
+                MessageBox.Show("Error saving Category");
+            }
+
+            CategoryNametextBox1.Focus();
         }
 
         private void Updatebutton_Click(object sender, EventArgs e)
         {
-
+            CategoryfrmProperties cf = new CategoryfrmProperties
+            {
+                CategoryID = Convert.ToInt32(CategoryIDtextBox3.Text),
+                CategoryName = CategoryNametextBox1.Text,
+                Description = DescriptiontextBox2.Text,
+                IsActive = Convert.ToInt32(chkShowDeleted.Checked)
+            };
+            int result = bll.UpdateCategoryBLL(cf);
+            if (result > 0)
+            {
+                MessageBox.Show("Category updated successfully");
+                loadcategories();
+                clearform();
+            }
+            else
+            {
+                MessageBox.Show("Error updating category");
+            }
+            CategoryNametextBox1.Focus();
         }
 
         private void Deletebutton_Click(object sender, EventArgs e)
         {
-
+            int id = Convert.ToInt32(CategoryIDtextBox3.Text);
+            CategoryfrmProperties cf = new CategoryfrmProperties
+            {
+                CategoryID = id,
+            };
+            DialogResult dr = MessageBox.Show("Are you sure??", "Confirm", MessageBoxButtons.YesNo);
+            if(dr == DialogResult.Yes)
+            {
+                int result = bll.DeleteCategoryBLL(cf); ;
+                if(result > 0)
+                {
+                    MessageBox.Show("Category Deleted successfully");
+                    loadcategories();
+                    clearform();
+                }
+                else
+                {
+                    MessageBox.Show("Error while deleting categpry");
+                }
+            }
+                CategoryNametextBox1.Focus();
         }
 
         private void Clearbutton_Click(object sender, EventArgs e)
         {
-
+            clearform();
+            CategoryNametextBox1.Focus();
         }
+            
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
              
+        }
+
+        public void loadcategories()
+        {
+            bool showdeleted = chkShowDeleted.Checked;
+            DataTable dt = bll.ViewCategoriesBLL(showdeleted);
+            dataGridView1.DataSource = dt;
+        }
+
+
+        public void clearform()
+        {
+            CategoryNametextBox1.Text = "";
+            DescriptiontextBox2.Text = "";
+            CategoryIDtextBox3.Text = "";
+            chkShowDeleted.Checked = false;
+        }
+
+        private void CategoriesForm_Load(object sender, EventArgs e)
+        {
+            loadcategories();
+        }
+
+        public bool validatecategoryform()
+        {
+            string categoryname = CategoryNametextBox1.Text.Trim();
+            if (string.IsNullOrEmpty(categoryname))
+            {
+                MessageBox.Show("Categoryname cannot be empty ");
+                CategoryNametextBox1.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        private void chkShowDeleted_CheckedChanged(object sender, EventArgs e)
+        {
+            loadcategories();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.CurrentRow.Selected = true;
+            CategoryNametextBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryName"].Value.ToString();
+            DescriptiontextBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+            CategoryIDtextBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryId"].Value.ToString();
         }
     }
 }

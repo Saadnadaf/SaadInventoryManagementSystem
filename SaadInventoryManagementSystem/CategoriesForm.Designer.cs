@@ -54,6 +54,7 @@ namespace SaadInventoryManagementSystem
             this.chkShowDeleted.TabIndex = 20;
             this.chkShowDeleted.Text = "Show Deleted  ";
             this.chkShowDeleted.UseVisualStyleBackColor = true;
+            this.chkShowDeleted.CheckedChanged += new System.EventHandler(this.chkShowDeleted_CheckedChanged);
             // 
             // dataGridView1
             // 
@@ -62,6 +63,7 @@ namespace SaadInventoryManagementSystem
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(383, 281);
             this.dataGridView1.TabIndex = 19;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Clearbutton
@@ -180,6 +182,7 @@ namespace SaadInventoryManagementSystem
             this.Name = "CategoriesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CategoriesForm";
+            this.Load += new System.EventHandler(this.CategoriesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

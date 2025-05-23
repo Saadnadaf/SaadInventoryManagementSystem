@@ -99,9 +99,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business_Layer\Business_Layer.csproj">
+      <Project>{9da24de6-aa10-4a4f-9129-7e28a5d54690}</Project>
+      <Name>Business_Layer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data_Access_Layer\Data_Access_Layer.csproj">
       <Project>{987ec739-24a9-466d-bc1e-952df784e70e}</Project>
       <Name>Data_Access_Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Property_Layer\Property_Layer.csproj">
+      <Project>{9f43a396-b2d3-40a5-95a6-064faf0806c1}</Project>
+      <Name>Property_Layer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

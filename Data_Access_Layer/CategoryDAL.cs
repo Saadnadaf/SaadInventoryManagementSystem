@@ -12,38 +12,36 @@ namespace Data_Access_Layer
     public class CategoryDAL
     {
         public SqlConnection con;
-        
+
         public void connect()
         {
             try
             {
-            con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString);
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString);
 
-            con.Open();
+                con.Open();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               throw new Exception("Error while connecting " + ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
+                throw new Exception("Error while connecting " + ex.Message.ToString());
             }
         }
 
-        public int InsertCategory(string CategoryName , string Description)
+        public int InsertCategory(string CategoryName, string Description)
         {
             try
             {
                 connect();
-                SqlCommand cmd = new SqlCommand(" SP_Categories_Insert", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
-                cmd.Parameters.AddWithValue("@Description", Description);
-                int result = cmd.ExecuteNonQuery();
-                return result;
+                using (SqlCommand cmd = new SqlCommand("SP_Categories_Insert", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
+                    cmd.Parameters.AddWithValue("@Description", Description);
+                    int result = cmd.ExecuteNonQuery();
+                    return result;
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error while inserting " + ex.Message.ToString());
             }
@@ -52,22 +50,24 @@ namespace Data_Access_Layer
                 con.Close();
             }
 
-            
+
         }
 
-        public int UpdateCategory(string CategoryName, string Description, int Categoryid, char Isactive)
+        public int UpdateCategory(string CategoryName, string Description, int Categoryid, int Isactive)
         {
             try
             {
                 connect();
-                SqlCommand cmd = new SqlCommand("Sp_categories_Update", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
-                cmd.Parameters.AddWithValue("@Description", Description);
-                cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
-                cmd.Parameters.AddWithValue("@Isactive", Isactive);
-                int result = cmd.ExecuteNonQuery();
-                return result;
+
+                using (SqlCommand cmd = new SqlCommand("Sp_categories_Update", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
+                    cmd.Parameters.AddWithValue("@Description", Description);
+                    cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
+                    int result = cmd.ExecuteNonQuery();
+                    return result;
+                }
             }
             catch (Exception ex)
             {
@@ -82,47 +82,71 @@ namespace Data_Access_Layer
         {
             try
             {
-                    connect();
-                    SqlCommand cmd = new SqlCommand("Sp_categories_Delete", con);
+                connect();
+                using (SqlCommand cmd = new SqlCommand("Sp_categories_Delete", con))
+                {
+
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
                     int result = cmd.ExecuteNonQuery();
                     return result;
+                }
             }
             catch (Exception ex)
             {
-                    throw new Exception("Error while Deleting " + ex.Message.ToString());
-            }
-            finally
-            {
-                    con.Close();
-            }
-
-
-        }
-
-        public DataTable ViewCategory()
-        {
-            try
-            {
-                connect();
-                SqlCommand cmd = new SqlCommand("SP_Categories_ViewAllCategories", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error while Fetching" + ex.Message.ToString());
+                throw new Exception("Error while Deleting " + ex.Message.ToString());
             }
             finally
             {
                 con.Close();
             }
+
+
         }
+
+        public DataTable ViewCategory(bool showDeleted)
+        {
+            try
+            {
+                connect();
+                using (SqlCommand cmd = new SqlCommand("SP_Categories_ViewAllCategories", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ShowDeleted", showDeleted);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while Fetching" + ex.Message.ToString());
+            }
+
+            
+        }
+
+        public bool checkCategoryExist(string categoryName)
+        {
+            try
+            {
+                connect();
+                using (SqlCommand cmd = new SqlCommand("Sp_Categories_CheckExists", con))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CategoryName", categoryName);
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error while check the data existance "+ex.Message.ToString());
+            }
+            
+
+           }
     }
 }
-
-

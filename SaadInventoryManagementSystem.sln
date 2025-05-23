@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaadInventoryManagementSyst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Access_Layer", "Data_Access_Layer\Data_Access_Layer.csproj", "{987EC739-24A9-466D-BC1E-952DF784E70E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business_Layer", "Business_Layer\Business_Layer.csproj", "{9DA24DE6-AA10-4A4F-9129-7E28A5D54690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Property_Layer", "Property_Layer\Property_Layer.csproj", "{9F43A396-B2D3-40A5-95A6-064FAF0806C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{987EC739-24A9-466D-BC1E-952DF784E70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{987EC739-24A9-466D-BC1E-952DF784E70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{987EC739-24A9-466D-BC1E-952DF784E70E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DA24DE6-AA10-4A4F-9129-7E28A5D54690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DA24DE6-AA10-4A4F-9129-7E28A5D54690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DA24DE6-AA10-4A4F-9129-7E28A5D54690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DA24DE6-AA10-4A4F-9129-7E28A5D54690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F43A396-B2D3-40A5-95A6-064FAF0806C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F43A396-B2D3-40A5-95A6-064FAF0806C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F43A396-B2D3-40A5-95A6-064FAF0806C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F43A396-B2D3-40A5-95A6-064FAF0806C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
