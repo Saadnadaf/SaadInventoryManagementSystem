@@ -145,11 +145,12 @@ namespace SaadInventoryManagementSystem
             // 
             // CategoryIDtextBox3
             // 
-            this.CategoryIDtextBox3.Location = new System.Drawing.Point(345, 77);
+            this.CategoryIDtextBox3.Location = new System.Drawing.Point(345, 78);
             this.CategoryIDtextBox3.Multiline = true;
             this.CategoryIDtextBox3.Name = "CategoryIDtextBox3";
             this.CategoryIDtextBox3.Size = new System.Drawing.Size(77, 20);
             this.CategoryIDtextBox3.TabIndex = 21;
+            this.CategoryIDtextBox3.Visible = false;
             this.CategoryIDtextBox3.TextChanged += new System.EventHandler(this.CategoryIDtextBox3_TextChanged);
             // 
             // label3
@@ -161,6 +162,7 @@ namespace SaadInventoryManagementSystem
             this.label3.Size = new System.Drawing.Size(107, 19);
             this.label3.TabIndex = 22;
             this.label3.Text = "Category ID :";
+            this.label3.Visible = false;
             // 
             // CategoriesForm
             // 

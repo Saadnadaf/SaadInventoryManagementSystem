@@ -7,82 +7,82 @@ using System.Data.SqlClient;
 using Data_Access_Layer;
 using Property_Layer;
 using System.Data;
-
 namespace Business_Layer
 {
-    public class CategoryBLL
+    public class ProductBLL
     {
-        CategoryDAL dal = new CategoryDAL();
+        ProductDAL dal = new ProductDAL();
 
-        public bool dataexist(string categoryname)
+
+        public bool dataexist(string ProductName)
         {
             try
             {
-                return dal.checkCategoryExist(categoryname);
+                return dal.checkProductExist(ProductName);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception ("Error in dataexist BLL "+ ex.Message.ToString());
+                throw new Exception("Error in dataexist BLL " + ex.Message.ToString());
             }
         }
-        
-        public int InsertCategoryBLL(CategoryfrmProperties cf)
+
+        public int InsertProductBLL(ProductFormProperties pf)
         {
             try
             {
-                if (!dataexist(cf.CategoryName))
+                if (!dataexist(pf.ProductName))
                 {
-                    return dal.InsertCategory(cf.CategoryName, cf.Description);
+                    return dal.InsertProduct(pf.CategoryId,pf.ProductName, pf.Quantity,pf.Price);
                 }
                 else
                 {
-                    return -2; 
+                    return -2;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error while inserting " + ex.Message.ToString());
             }
         }
 
-        public int UpdateCategoryBLL(CategoryfrmProperties cf)
+        public int UpdateProductBLL(ProductFormProperties pf)
         {
             try
             {
-                return dal.UpdateCategory( cf.CategoryName,cf.Description, cf.CategoryID,cf.IsActive);
+                return dal.UpdateProduct(pf.ProductId,pf.ProductName, pf.CategoryId, pf.Quantity, pf.Price);
             }
-            
-            catch(Exception ex)
+
+            catch (Exception ex)
             {
                 throw new Exception("Error while updating " + ex.Message.ToString());
             }
         }
 
 
-        public int DeleteCategoryBLL(CategoryfrmProperties cf)
+        public int DeleteProductBLL(ProductFormProperties pf)
         {
             try
             {
-                return dal.DeleteCategory(cf.CategoryID);
+                return dal.DeleteProduct(pf.ProductId);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error while Deleting " + ex.Message.ToString());
             }
         }
 
-        public DataTable ViewCategoriesBLL(bool showDeleted)
+
+        public DataTable ViewProductBLL(bool showDeleted)
         {
             try
             {
-                return dal.ViewCategory(showDeleted);
+                return dal.ViewProduct(showDeleted);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error while Fetching" + ex.Message.ToString());
             }
         }
-        
 
     }
 }

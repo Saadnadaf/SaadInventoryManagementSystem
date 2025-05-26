@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Data_Access_Layer
 {
-    public class CategoryDAL
+
+    public class ProductDAL
     {
         public SqlConnection con;
 
@@ -27,18 +28,22 @@ namespace Data_Access_Layer
             }
         }
 
-        public int InsertCategory(string CategoryName, string Description)
+
+
+        public int InsertProduct(int CategoryID,string ProductName, int Quantity, decimal   Price)
         {
             try
             {
                 connect();
 
-               
-                using (SqlCommand cmd = new SqlCommand("SP_Categories_Insert", con))
+
+                using (SqlCommand cmd = new SqlCommand("SP_Product_Insert", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
-                    cmd.Parameters.AddWithValue("@Description", Description);
+                    cmd.Parameters.AddWithValue("@ProductName", ProductName);
+                    cmd.Parameters.AddWithValue("@CategoryID", CategoryID);
+                    cmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    cmd.Parameters.AddWithValue("@Price", Price);
                     SqlParameter returnParam = new SqlParameter();
                     returnParam.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(returnParam);
@@ -59,18 +64,20 @@ namespace Data_Access_Layer
 
         }
 
-        public int UpdateCategory(string CategoryName, string Description, int Categoryid, int Isactive)
+        public int UpdateProduct(int ProductID , string ProductName, int CategoryID, int Quantity, decimal Price)
         {
             try
             {
                 connect();
 
-                using (SqlCommand cmd = new SqlCommand("Sp_categories_Update", con))
+                using (SqlCommand cmd = new SqlCommand("SP_Product_Update", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
-                    cmd.Parameters.AddWithValue("@Description", Description);
-                    cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
+                    cmd.Parameters.AddWithValue("@ProductID", ProductID);
+                    cmd.Parameters.AddWithValue("@ProductName", ProductName);
+                    cmd.Parameters.AddWithValue("@CategoryID", CategoryID);
+                    cmd.Parameters.AddWithValue("@Quantity", Quantity);
+                    cmd.Parameters.AddWithValue("@Price", Price);
                     int result = cmd.ExecuteNonQuery();
                     return result;
                 }
@@ -84,16 +91,18 @@ namespace Data_Access_Layer
                 con.Close();
             }
         }
-        public int DeleteCategory(int Categoryid)
+
+
+        public int DeleteProduct(int ProductID)
         {
             try
             {
                 connect();
-                using (SqlCommand cmd = new SqlCommand("Sp_categories_Delete", con))
+                using (SqlCommand cmd = new SqlCommand("SP_Product_Delete", con))
                 {
 
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
+                    cmd.Parameters.AddWithValue("@ProductID", ProductID);
                     int result = cmd.ExecuteNonQuery();
                     return result;
                 }
@@ -104,47 +113,25 @@ namespace Data_Access_Layer
             }
             finally
             {
-                    con.Close();
+                con.Close();
             }
 
 
         }
 
-
-        public bool checkCategoryExist(string categoryName)
+        public DataTable ViewProduct(bool showDeleted)
         {
             try
             {
                 connect();
-                using (SqlCommand cmd = new SqlCommand("Sp_Categories_CheckExists", con))
-                {
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@CategoryName", categoryName);
-                    int result = cmd.ExecuteNonQuery();
-                    return result > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error while check the data existance " + ex.Message.ToString());
-            }
-
-
-        }
-
-        public DataTable ViewCategory(bool showDeleted)
-        {
-            try
-            {
-                connect();
-                using (SqlCommand cmd = new SqlCommand("SP_Categories_ViewAllCategories", con))
+                using (SqlCommand cmd = new SqlCommand("SP_Product_View", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ShowDeleted", showDeleted);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
+                   
                     return dt;
                 }
             }
@@ -161,25 +148,31 @@ namespace Data_Access_Layer
 
         }
 
-        public DataTable getactivecategories()
+
+
+        public bool checkProductExist(string ProductName)
         {
-            connect();
-            using(SqlCommand cmd = new SqlCommand("Select CategoryId , CategoryName from Categories where IsActive=1",con))
+            try
             {
-                using(SqlDataAdapter da = new SqlDataAdapter(cmd))
+                connect();
+                using (SqlCommand cmd = new SqlCommand("SP_Product_CheckExists", con))
                 {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ProductName", ProductName);
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
                 }
-                
             }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while check the data existance " + ex.Message.ToString());
+            }
+
+
         }
 
-        
-            
     }
 
-
-
 }
+

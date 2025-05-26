@@ -29,7 +29,7 @@ namespace SaadInventoryManagementSystem
         CategoryBLL bll = new CategoryBLL();
         private void Savebutton_Click(object sender, EventArgs e)
         {
-            if (!validatecategoryform())
+            if (!validatecategoryform1())
             {
                 return;
             }
@@ -60,6 +60,10 @@ namespace SaadInventoryManagementSystem
 
         private void Updatebutton_Click(object sender, EventArgs e)
         {
+            if (!validatecategoryform2())
+            {
+                return;
+            }
             CategoryfrmProperties cf = new CategoryfrmProperties
             {
                 CategoryID = Convert.ToInt32(CategoryIDtextBox3.Text),
@@ -83,6 +87,10 @@ namespace SaadInventoryManagementSystem
 
         private void Deletebutton_Click(object sender, EventArgs e)
         {
+            if (!validatecategoryform2())
+            {
+                return;
+            }
             int id = Convert.ToInt32(CategoryIDtextBox3.Text);
             CategoryfrmProperties cf = new CategoryfrmProperties
             {
@@ -123,6 +131,7 @@ namespace SaadInventoryManagementSystem
             bool showdeleted = chkShowDeleted.Checked;
             DataTable dt = bll.ViewCategoriesBLL(showdeleted);
             dataGridView1.DataSource = dt;
+            dataGridView1.Columns["CategoryId"].Visible = false;
         }
 
 
@@ -139,18 +148,29 @@ namespace SaadInventoryManagementSystem
             loadcategories();
         }
 
-        public bool validatecategoryform()
+        public bool validatecategoryform1()
         {
             string categoryname = CategoryNametextBox1.Text.Trim();
             if (string.IsNullOrEmpty(categoryname))
             {
-                MessageBox.Show("Categoryname cannot be empty ");
+                MessageBox.Show("Category Name cannot be empty ");
                 CategoryNametextBox1.Focus();
                 return false;
             }
             return true;
         }
 
+        public bool validatecategoryform2()
+        {
+            string categoryid = Convert.ToString(CategoryIDtextBox3.Text.Trim());
+            if (categoryid == "")
+            {
+                MessageBox.Show("Category ID cannot be empty ");
+                CategoryNametextBox1.Focus();
+                return false;
+            }
+            return true;
+        }
         private void chkShowDeleted_CheckedChanged(object sender, EventArgs e)
         {
             loadcategories();
@@ -162,6 +182,9 @@ namespace SaadInventoryManagementSystem
             CategoryNametextBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryName"].Value.ToString();
             DescriptiontextBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Description"].Value.ToString();
             CategoryIDtextBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryId"].Value.ToString();
+                 
         }
     }
+
+   
 }

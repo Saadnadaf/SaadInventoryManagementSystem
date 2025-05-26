@@ -34,7 +34,7 @@ namespace SaadInventoryManagementSystem
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1Category = new System.Windows.Forms.ComboBox();
+            this.comboBoxCategory = new System.Windows.Forms.ComboBox();
             this.QuantiytextBox2 = new System.Windows.Forms.TextBox();
             this.PricetextBox3 = new System.Windows.Forms.TextBox();
             this.Savebutton = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@ namespace SaadInventoryManagementSystem
             // 
             // ProductNametextBox1
             // 
-            this.ProductNametextBox1.Location = new System.Drawing.Point(219, 45);
+            this.ProductNametextBox1.Location = new System.Drawing.Point(219, 95);
             this.ProductNametextBox1.Name = "ProductNametextBox1";
             this.ProductNametextBox1.Size = new System.Drawing.Size(178, 20);
             this.ProductNametextBox1.TabIndex = 0;
@@ -57,7 +57,7 @@ namespace SaadInventoryManagementSystem
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(86, 44);
+            this.label1.Location = new System.Drawing.Point(87, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(127, 19);
             this.label1.TabIndex = 1;
@@ -67,7 +67,7 @@ namespace SaadInventoryManagementSystem
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(127, 92);
+            this.label2.Location = new System.Drawing.Point(128, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 19);
             this.label2.TabIndex = 2;
@@ -93,13 +93,14 @@ namespace SaadInventoryManagementSystem
             this.label4.TabIndex = 4;
             this.label4.Text = "Price :";
             // 
-            // comboBox1Category
+            // comboBoxCategory
             // 
-            this.comboBox1Category.FormattingEnabled = true;
-            this.comboBox1Category.Location = new System.Drawing.Point(219, 90);
-            this.comboBox1Category.Name = "comboBox1Category";
-            this.comboBox1Category.Size = new System.Drawing.Size(155, 21);
-            this.comboBox1Category.TabIndex = 5;
+            this.comboBoxCategory.FormattingEnabled = true;
+            this.comboBoxCategory.Location = new System.Drawing.Point(219, 41);
+            this.comboBoxCategory.Name = "comboBoxCategory";
+            this.comboBoxCategory.Size = new System.Drawing.Size(155, 21);
+            this.comboBoxCategory.TabIndex = 5;
+            this.comboBoxCategory.SelectedIndexChanged += new System.EventHandler(this.comboBoxCategory_SelectedIndexChanged);
             // 
             // QuantiytextBox2
             // 
@@ -123,6 +124,7 @@ namespace SaadInventoryManagementSystem
             this.Savebutton.TabIndex = 8;
             this.Savebutton.Text = "Save";
             this.Savebutton.UseVisualStyleBackColor = true;
+            this.Savebutton.Click += new System.EventHandler(this.Savebutton_Click);
             // 
             // Updatebutton
             // 
@@ -132,6 +134,7 @@ namespace SaadInventoryManagementSystem
             this.Updatebutton.TabIndex = 9;
             this.Updatebutton.Text = "Update";
             this.Updatebutton.UseVisualStyleBackColor = true;
+            this.Updatebutton.Click += new System.EventHandler(this.Updatebutton_Click);
             // 
             // Deletebutton
             // 
@@ -141,6 +144,7 @@ namespace SaadInventoryManagementSystem
             this.Deletebutton.TabIndex = 10;
             this.Deletebutton.Text = "Delete";
             this.Deletebutton.UseVisualStyleBackColor = true;
+            this.Deletebutton.Click += new System.EventHandler(this.Deletebutton_Click);
             // 
             // Clearbutton
             // 
@@ -150,6 +154,7 @@ namespace SaadInventoryManagementSystem
             this.Clearbutton.TabIndex = 11;
             this.Clearbutton.Text = "Clear";
             this.Clearbutton.UseVisualStyleBackColor = true;
+            this.Clearbutton.Click += new System.EventHandler(this.Clearbutton_Click);
             // 
             // dataGridView1
             // 
@@ -158,6 +163,8 @@ namespace SaadInventoryManagementSystem
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(393, 263);
             this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // chkShowDeleted
             // 
@@ -169,6 +176,7 @@ namespace SaadInventoryManagementSystem
             this.chkShowDeleted.TabIndex = 13;
             this.chkShowDeleted.Text = "Show Deleted";
             this.chkShowDeleted.UseVisualStyleBackColor = true;
+            this.chkShowDeleted.CheckedChanged += new System.EventHandler(this.chkShowDeleted_CheckedChanged);
             // 
             // ProductForm
             // 
@@ -183,7 +191,7 @@ namespace SaadInventoryManagementSystem
             this.Controls.Add(this.Savebutton);
             this.Controls.Add(this.PricetextBox3);
             this.Controls.Add(this.QuantiytextBox2);
-            this.Controls.Add(this.comboBox1Category);
+            this.Controls.Add(this.comboBoxCategory);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -192,6 +200,7 @@ namespace SaadInventoryManagementSystem
             this.Name = "ProductForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProductForm";
+            this.Load += new System.EventHandler(this.ProductForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -205,7 +214,7 @@ namespace SaadInventoryManagementSystem
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1Category;
+        private System.Windows.Forms.ComboBox comboBoxCategory;
         private System.Windows.Forms.TextBox QuantiytextBox2;
         private System.Windows.Forms.TextBox PricetextBox3;
         private System.Windows.Forms.Button Savebutton;
