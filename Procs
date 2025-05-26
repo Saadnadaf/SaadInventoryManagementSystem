@@ -1,0 +1,59 @@
+--ProductsDAL Proc
+
+
+create proc SP_Product_Insert
+@ProductName nvarchar(50),
+@CategoryID int,
+@Price decimal(10,2),
+@Quantity int 
+as
+begin
+insert into Products(ProductName,CategoryId,Quantity,Price)
+values
+(@ProductName,@CategoryId,@Quantity,@Price)
+end
+
+create proc SP_Product_Update
+@ProductID int,
+@ProductName nvarchar(50),
+@CategoryID int,
+@Price decimal(10,2),
+@Quantity int 
+as
+begin
+Update Products set ProductName = @ProductName,CategoryId=@CategoryId,
+Quantity = @Quantity,Price = @Price where ProductId = @ProductID
+end
+
+create proc SP_Product_Delete
+@ProductID int
+as
+begin
+Update Products set IsActive = 0 where ProductId = @ProductID
+end
+
+
+
+create proc SP_Product_View
+@Showdeleted bit
+as
+begin
+select p.ProductId,p.ProductName,c.categoryname,p.Price,p.Quantity 
+from Products p join Categories c on p.CategoryId=c.CategoryId where
+p.IsActive = case when @Showdeleted=1 then 0 else 1 end
+end
+
+
+
+
+CREATE proc SP_Product_CheckExists
+@ProductName nvarchar(50)
+as
+begin
+select count(*) from Products where lower(ProductName)=lower(@ProductName)
+and IsActive=1
+end
+
+
+
+
