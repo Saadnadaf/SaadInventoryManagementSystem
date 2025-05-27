@@ -132,6 +132,9 @@ namespace SaadInventoryManagementSystem
             DataTable dt = bll.ViewCategoriesBLL(showdeleted);
             dataGridView1.DataSource = dt;
             dataGridView1.Columns["CategoryId"].Visible = false;
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
 

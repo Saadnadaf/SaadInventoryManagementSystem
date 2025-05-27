@@ -124,7 +124,7 @@ namespace Data_Access_Layer
             try
             {
                 connect();
-                using (SqlCommand cmd = new SqlCommand("SP_Product_View", con))
+                using (SqlCommand cmd = new SqlCommand("SP_Product_View",con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ShowDeleted", showDeleted);
@@ -148,13 +148,13 @@ namespace Data_Access_Layer
 
         }
 
-
+          
 
         public bool checkProductExist(string ProductName)
         {
-            try
+            try  
             {
-                connect();
+                connect();    
                 using (SqlCommand cmd = new SqlCommand("SP_Product_CheckExists", con))
                 {
 
