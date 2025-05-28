@@ -149,6 +149,7 @@ namespace SaadInventoryManagementSystem
         private void CategoriesForm_Load(object sender, EventArgs e)
         {
             loadcategories();
+            
         }
 
         public bool validatecategoryform1()

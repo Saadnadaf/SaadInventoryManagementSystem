@@ -25,7 +25,7 @@ namespace SaadInventoryManagementSystem
 
         private void Savebutton_Click(object sender, EventArgs e)
         {
-            if (!validatecategoryform1())
+            if (!validateproductform1())
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace SaadInventoryManagementSystem
 
         private void Updatebutton_Click(object sender, EventArgs e)
         {
-            if (!validatecategoryform1())
+            if (!validateproductform1())
             {
                 comboBoxCategory.Focus();
                 return;
@@ -96,7 +96,7 @@ namespace SaadInventoryManagementSystem
 
         private void Deletebutton_Click(object sender, EventArgs e)
         {
-            if (!validatecategoryform1())
+            if (!validateproductform1())
             {
                 comboBoxCategory.Focus();
                 return;
@@ -139,12 +139,19 @@ namespace SaadInventoryManagementSystem
         private void ProductForm_Load(object sender, EventArgs e)
         {
             loadcategories();
-            comboBoxCategory.Focus();
+            BeginInvoke((MethodInvoker)(() => comboBoxCategory.Focus()));
         }
 
 
-        public bool validatecategoryform1()
+        public bool validateproductform1()
         {
+            string cmbcategory = comboBoxCategory.Text.Trim();
+            if (string.IsNullOrEmpty(cmbcategory))
+            {
+                MessageBox.Show("Category Name cannot be empty ");
+                comboBoxCategory.Focus();
+                return false;
+            }
             string productname = ProductNametextBox1.Text.Trim();
             if (string.IsNullOrEmpty(productname))
             {
@@ -152,11 +159,25 @@ namespace SaadInventoryManagementSystem
                 ProductNametextBox1.Focus();
                 return false;
             }
+            string quantitystr = QuantiytextBox2.Text.Trim();
+            if (string.IsNullOrEmpty(quantitystr))
+            {
+                MessageBox.Show("Quanity cannot be empty ");
+                QuantiytextBox2.Focus();
+                return false;
+            }
             int quantity = Convert.ToInt32(QuantiytextBox2.Text.Trim());
-            if (quantity <= 0)
+            if (quantity <= 0 )
             {
                 MessageBox.Show("Quantity should be more than 0");
                 QuantiytextBox2.Focus();
+                return false;
+            }
+            string pricestr = PricetextBox3.Text.Trim();
+            if (string.IsNullOrEmpty(pricestr))
+            {
+                MessageBox.Show("Price should not be empty");
+                PricetextBox3.Focus();
                 return false;
             }
             decimal price = Convert.ToDecimal(PricetextBox3.Text.Trim());
@@ -164,6 +185,18 @@ namespace SaadInventoryManagementSystem
             {
                 MessageBox.Show("Price should be more than 0");
                 PricetextBox3.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        public bool Validateproductform2()
+        {
+            string productidstr = Convert.ToString(dataGridView1.SelectedRows[0].Cells["ProductId"].Value);
+            if (productidstr == "")
+            {
+                MessageBox.Show("Please select a row to delete");
+                comboBoxCategory.Focus();
                 return false;
             }
             return true;
