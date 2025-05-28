@@ -169,7 +169,7 @@ namespace SaadInventoryManagementSystem
             string categoryid = Convert.ToString(CategoryIDtextBox3.Text.Trim());
             if (categoryid == "")
             {
-                MessageBox.Show("Category ID cannot be empty ");
+                MessageBox.Show("Select a row to delete ");
                 CategoryNametextBox1.Focus();
                 return false;
             }

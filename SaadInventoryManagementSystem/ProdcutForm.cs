@@ -27,7 +27,7 @@ namespace SaadInventoryManagementSystem
         {
             if (!validateproductform1())
             {
-                return;
+                return; 
             }
 
             ProductFormProperties pf = new ProductFormProperties
@@ -190,17 +190,7 @@ namespace SaadInventoryManagementSystem
             return true;
         }
 
-        public bool Validateproductform2()
-        {
-            string productidstr = Convert.ToString(dataGridView1.SelectedRows[0].Cells["ProductId"].Value);
-            if (productidstr == "")
-            {
-                MessageBox.Show("Please select a row to delete");
-                comboBoxCategory.Focus();
-                return false;
-            }
-            return true;
-        }
+        
 
 
         public void loadcategories()
@@ -236,15 +226,9 @@ namespace SaadInventoryManagementSystem
             comboBoxCategory.Focus();
         }
 
-        private void comboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void comboBoxCategory_SelectedIndexChanged(object sender, EventArgs e) { }
 
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
