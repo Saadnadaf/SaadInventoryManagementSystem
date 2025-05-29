@@ -21,6 +21,10 @@ namespace SaadInventoryManagementSystem
         public ProductForm()
         {
             InitializeComponent();
+            QuantiytextBox2.KeyPress += QuantiytextBox2_KeyPress;
+            PricetextBox3.KeyPress += PricetextBox3_KeyPress;
+            ProductNametextBox1.KeyPress += ProductNametextBox1_KeyPress;
+
         }
 
         private void Savebutton_Click(object sender, EventArgs e)
@@ -101,11 +105,6 @@ namespace SaadInventoryManagementSystem
                 comboBoxCategory.Focus();
                 return;
             }
-            if (dataGridView1.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a product to delete");
-                return;
-            }
             int productid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ProductId"].Value);
             ProductFormProperties pf = new ProductFormProperties
             {
@@ -152,6 +151,7 @@ namespace SaadInventoryManagementSystem
                 comboBoxCategory.Focus();
                 return false;
             }
+
             string productname = ProductNametextBox1.Text.Trim();
             if (string.IsNullOrEmpty(productname))
             {
@@ -167,6 +167,7 @@ namespace SaadInventoryManagementSystem
                 return false;
             }
             int quantity = Convert.ToInt32(QuantiytextBox2.Text.Trim());
+            
             if (quantity <= 0 )
             {
                 MessageBox.Show("Quantity should be more than 0");
@@ -185,13 +186,23 @@ namespace SaadInventoryManagementSystem
             {
                 MessageBox.Show("Price should be more than 0");
                 PricetextBox3.Focus();
-                return false;
+                 return false;
             }
             return true;
         }
 
-        
 
+        //public bool validproductform2()
+        //{
+        //    string productid = Convert.ToString(dataGridView1.SelectedRows[0].Cells["ProductId"].Value);
+        //    if (string.IsNullOrEmpty(productid))
+        //    {
+        //        MessageBox.Show("Select a row");
+        //        comboBoxCategory.Focus();
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         public void loadcategories()
         {
@@ -238,6 +249,30 @@ namespace SaadInventoryManagementSystem
             QuantiytextBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();
             PricetextBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["Price"].Value.ToString();
             comboBoxCategory.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryName"].Value.ToString();
+        }
+
+        private void QuantiytextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void PricetextBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void ProductNametextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -52,6 +52,7 @@ namespace SaadInventoryManagementSystem
             this.ProductNametextBox1.Name = "ProductNametextBox1";
             this.ProductNametextBox1.Size = new System.Drawing.Size(178, 20);
             this.ProductNametextBox1.TabIndex = 1;
+            this.ProductNametextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ProductNametextBox1_KeyPress);
             // 
             // label1
             // 
@@ -108,6 +109,7 @@ namespace SaadInventoryManagementSystem
             this.QuantiytextBox2.Name = "QuantiytextBox2";
             this.QuantiytextBox2.Size = new System.Drawing.Size(68, 20);
             this.QuantiytextBox2.TabIndex = 2;
+            this.QuantiytextBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.QuantiytextBox2_KeyPress);
             // 
             // PricetextBox3
             // 
@@ -115,6 +117,7 @@ namespace SaadInventoryManagementSystem
             this.PricetextBox3.Name = "PricetextBox3";
             this.PricetextBox3.Size = new System.Drawing.Size(111, 20);
             this.PricetextBox3.TabIndex = 3;
+            this.PricetextBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PricetextBox3_KeyPress);
             // 
             // Savebutton
             // 

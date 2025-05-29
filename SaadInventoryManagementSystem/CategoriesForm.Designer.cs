@@ -68,7 +68,7 @@ namespace SaadInventoryManagementSystem
             // 
             // Clearbutton
             // 
-            this.Clearbutton.Location = new System.Drawing.Point(454, 127);
+            this.Clearbutton.Location = new System.Drawing.Point(454, 153);
             this.Clearbutton.Name = "Clearbutton";
             this.Clearbutton.Size = new System.Drawing.Size(75, 38);
             this.Clearbutton.TabIndex = 18;
@@ -78,7 +78,7 @@ namespace SaadInventoryManagementSystem
             // 
             // Deletebutton
             // 
-            this.Deletebutton.Location = new System.Drawing.Point(373, 127);
+            this.Deletebutton.Location = new System.Drawing.Point(373, 153);
             this.Deletebutton.Name = "Deletebutton";
             this.Deletebutton.Size = new System.Drawing.Size(75, 38);
             this.Deletebutton.TabIndex = 17;
@@ -88,7 +88,7 @@ namespace SaadInventoryManagementSystem
             // 
             // Updatebutton
             // 
-            this.Updatebutton.Location = new System.Drawing.Point(292, 127);
+            this.Updatebutton.Location = new System.Drawing.Point(292, 153);
             this.Updatebutton.Name = "Updatebutton";
             this.Updatebutton.Size = new System.Drawing.Size(75, 38);
             this.Updatebutton.TabIndex = 16;
@@ -98,7 +98,7 @@ namespace SaadInventoryManagementSystem
             // 
             // Savebutton
             // 
-            this.Savebutton.Location = new System.Drawing.Point(211, 127);
+            this.Savebutton.Location = new System.Drawing.Point(211, 153);
             this.Savebutton.Name = "Savebutton";
             this.Savebutton.Size = new System.Drawing.Size(75, 38);
             this.Savebutton.TabIndex = 15;
@@ -108,7 +108,7 @@ namespace SaadInventoryManagementSystem
             // 
             // DescriptiontextBox2
             // 
-            this.DescriptiontextBox2.Location = new System.Drawing.Point(345, 39);
+            this.DescriptiontextBox2.Location = new System.Drawing.Point(345, 102);
             this.DescriptiontextBox2.Multiline = true;
             this.DescriptiontextBox2.Name = "DescriptiontextBox2";
             this.DescriptiontextBox2.Size = new System.Drawing.Size(167, 20);
@@ -119,7 +119,7 @@ namespace SaadInventoryManagementSystem
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(240, 40);
+            this.label2.Location = new System.Drawing.Point(240, 103);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 19);
             this.label2.TabIndex = 13;
@@ -129,7 +129,7 @@ namespace SaadInventoryManagementSystem
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(207, 9);
+            this.label1.Location = new System.Drawing.Point(207, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(136, 19);
             this.label1.TabIndex = 12;
@@ -137,15 +137,16 @@ namespace SaadInventoryManagementSystem
             // 
             // CategoryNametextBox1
             // 
-            this.CategoryNametextBox1.Location = new System.Drawing.Point(345, 8);
+            this.CategoryNametextBox1.Location = new System.Drawing.Point(345, 64);
             this.CategoryNametextBox1.Name = "CategoryNametextBox1";
-            this.CategoryNametextBox1.Size = new System.Drawing.Size(167, 20);
+            this.CategoryNametextBox1.Size = new System.Drawing.Size(131, 20);
             this.CategoryNametextBox1.TabIndex = 11;
             this.CategoryNametextBox1.TextChanged += new System.EventHandler(this.CategoryNametextBox1_TextChanged);
+            this.CategoryNametextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CategoryNametextBox1_KeyPress);
             // 
             // CategoryIDtextBox3
             // 
-            this.CategoryIDtextBox3.Location = new System.Drawing.Point(345, 78);
+            this.CategoryIDtextBox3.Location = new System.Drawing.Point(345, 130);
             this.CategoryIDtextBox3.Multiline = true;
             this.CategoryIDtextBox3.Name = "CategoryIDtextBox3";
             this.CategoryIDtextBox3.Size = new System.Drawing.Size(77, 20);
@@ -157,7 +158,7 @@ namespace SaadInventoryManagementSystem
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(236, 78);
+            this.label3.Location = new System.Drawing.Point(236, 131);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 19);
             this.label3.TabIndex = 22;

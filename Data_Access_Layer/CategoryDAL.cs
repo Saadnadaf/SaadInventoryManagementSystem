@@ -164,7 +164,7 @@ namespace Data_Access_Layer
         public DataTable getactivecategories()
         {
             connect();
-            using(SqlCommand cmd = new SqlCommand("Select CategoryId , CategoryName from Categories where IsActive=1",con))
+            using(SqlCommand cmd = new SqlCommand("Select CategoryId , CategoryName from Categories where IsActive=1 order by CategoryName", con))
             {
                 using(SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {

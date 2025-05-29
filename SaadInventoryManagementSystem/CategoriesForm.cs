@@ -15,9 +15,11 @@ namespace SaadInventoryManagementSystem
 {
     public partial class CategoriesForm : Form
     {
+
         public CategoriesForm()
         {
             InitializeComponent();
+            CategoryNametextBox1.KeyPress += CategoryNametextBox1_KeyPress;
         }
 
         private void CategoryNametextBox1_TextChanged(object sender, EventArgs e) { }
@@ -27,6 +29,7 @@ namespace SaadInventoryManagementSystem
         private void CategoryIDtextBox3_TextChanged(object sender, EventArgs e) { }
 
         CategoryBLL bll = new CategoryBLL();
+
         private void Savebutton_Click(object sender, EventArgs e)
         {
             if (!validatecategoryform1())
@@ -102,13 +105,13 @@ namespace SaadInventoryManagementSystem
                 int result = bll.DeleteCategoryBLL(cf); ;
                 if(result > 0)
                 {
-                    MessageBox.Show("Category Deleted successfully");
+                    MessageBox.Show("Category deleted successfully");
                     loadcategories();
                     clearform();
                 }
                 else
                 {
-                    MessageBox.Show("Error while deleting categpry");
+                    MessageBox.Show("Error while deleting category");
                 }
             }
                 CategoryNametextBox1.Focus();
@@ -157,7 +160,7 @@ namespace SaadInventoryManagementSystem
             string categoryname = CategoryNametextBox1.Text.Trim();
             if (string.IsNullOrEmpty(categoryname))
             {
-                MessageBox.Show("Category Name cannot be empty ");
+                MessageBox.Show("Category name cannot be empty ");
                 CategoryNametextBox1.Focus();
                 return false;
             }
@@ -169,7 +172,7 @@ namespace SaadInventoryManagementSystem
             string categoryid = Convert.ToString(CategoryIDtextBox3.Text.Trim());
             if (categoryid == "")
             {
-                MessageBox.Show("Select a row to delete ");
+                MessageBox.Show("Please select a row ");
                 CategoryNametextBox1.Focus();
                 return false;
             }
@@ -177,16 +180,26 @@ namespace SaadInventoryManagementSystem
         }
         private void chkShowDeleted_CheckedChanged(object sender, EventArgs e)
         {
+           
             loadcategories();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
             dataGridView1.CurrentRow.Selected = true;
             CategoryNametextBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryName"].Value.ToString();
             DescriptiontextBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Description"].Value.ToString();
             CategoryIDtextBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryId"].Value.ToString();
                  
+        }
+
+        private void CategoryNametextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 
