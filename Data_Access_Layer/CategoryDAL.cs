@@ -77,7 +77,7 @@ namespace Data_Access_Layer
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while updating " + ex.Message.ToString());
+                throw new Exception("Error while updating" + ex.Message.ToString());
             }
             finally
             {

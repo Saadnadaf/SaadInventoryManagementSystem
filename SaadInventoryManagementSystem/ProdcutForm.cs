@@ -57,10 +57,13 @@ namespace SaadInventoryManagementSystem
                 MessageBox.Show("Error saving Product");
             }
 
+            comboBoxCategory.Focus();
+
         }
 
         private void Updatebutton_Click(object sender, EventArgs e)
         {
+            
             if (!validateproductform1())
             {
                 comboBoxCategory.Focus();
@@ -220,7 +223,9 @@ namespace SaadInventoryManagementSystem
             comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDown;
             comboBoxCategory.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxCategory.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxCategory.IntegralHeight = false;
         }
+
 
         public void clearform()
         {
@@ -265,10 +270,11 @@ namespace SaadInventoryManagementSystem
             {
                 e.Handled = true;
             }
-        }
+        }   
 
         private void ProductNametextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            
             if(!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true;
