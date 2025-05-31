@@ -12,8 +12,6 @@ namespace Business_Layer
     public class ProductBLL
     {
         ProductDAL dal = new ProductDAL();
-
-
         public bool dataexist(string ProductName)
         {
             try
@@ -25,12 +23,13 @@ namespace Business_Layer
                 throw new Exception("Error in dataexist BLL " + ex.Message.ToString());
             }
         }
-
+         
         public int InsertProductBLL(ProductFormProperties pf)
         {
             try
             {
-                if (!dataexist(pf.ProductName))
+                
+                if (!dataexist(pf.ProductName) )
                 {
                     return dal.InsertProduct(pf.CategoryId,pf.ProductName, pf.Quantity,pf.Price);
                 }

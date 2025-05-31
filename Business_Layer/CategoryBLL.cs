@@ -25,6 +25,7 @@ namespace Business_Layer
                 throw new Exception ("Error in dataexist BLL "+ ex.Message.ToString());
             }
         }
+
         
         public int InsertCategoryBLL(CategoryfrmProperties cf)
         {
@@ -83,6 +84,34 @@ namespace Business_Layer
             }
         }
         
+        public int GetorCreateCategoryID(string categoryname,string description = "Added from productfrm")
+        {
+            if (string.IsNullOrEmpty(categoryname))
+            {
+                throw new Exception("Category name cannot be null or empty ");
+            }
+            if (!dataexist(categoryname))
+            {
+                int inserted = dal.InsertCategory(categoryname, description);
+                if (inserted > 0)
+                {
+                    return dal.getCategoryNameByID(categoryname);
+                }
+                else if(inserted == -2)
+                {
+                    throw new Exception("Category not active");
+                }
+                
+                else
+                {
+                    throw new Exception("Failed to insert a new category");
+                }
+             }
+            else
+            {
+                return dal.getCategoryNameByID(categoryname);
+            }
+        }
 
     }
 }

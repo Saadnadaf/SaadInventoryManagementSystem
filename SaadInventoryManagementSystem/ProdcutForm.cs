@@ -16,7 +16,9 @@ namespace SaadInventoryManagementSystem
 {
     public partial class ProductForm : Form
     {
+        CategoryBLL cbll = new CategoryBLL(); 
         ProductBLL bll = new ProductBLL();
+        CategoryfrmProperties cf = new CategoryfrmProperties();
 
         public ProductForm()
         {
@@ -33,14 +35,26 @@ namespace SaadInventoryManagementSystem
             {
                 return; 
             }
-
+            string categoryname = comboBoxCategory.Text.Trim();
+            int categoryid = -1;
+            try
+            {
+                categoryid = cbll.GetorCreateCategoryID(categoryname);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
             ProductFormProperties pf = new ProductFormProperties
             {
-                CategoryId = Convert.ToInt32(comboBoxCategory.SelectedValue),
+                CategoryName = categoryname,
+                CategoryId = categoryid,
                 ProductName = ProductNametextBox1.Text.Trim(),
                 Quantity = Convert.ToInt32(QuantiytextBox2.Text.Trim()),
                 Price = Convert.ToDecimal(PricetextBox3.Text.Trim())
             };
+            
             int result = bll.InsertProductBLL(pf);
             if (result > 0)
             {
@@ -75,10 +89,14 @@ namespace SaadInventoryManagementSystem
                 MessageBox.Show("Please select a product to return");
                 return;
             }
+
+            string categoryname = comboBoxCategory.Text.Trim();
+            int categoryid = cbll.GetorCreateCategoryID(categoryname);
             int productid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ProductId"].Value);
             ProductFormProperties pf = new ProductFormProperties
             {
-                CategoryId = Convert.ToInt32(comboBoxCategory.SelectedValue),
+                CategoryId = categoryid,
+                //CategoryId = Convert.ToInt32(comboBoxCategory.SelectedValue),
                 ProductName = ProductNametextBox1.Text.Trim(),
                 Quantity = Convert.ToInt32(QuantiytextBox2.Text.Trim()),
                 Price = Convert.ToDecimal(PricetextBox3.Text.Trim()),
@@ -193,19 +211,6 @@ namespace SaadInventoryManagementSystem
             }
             return true;
         }
-
-
-        //public bool validproductform2()
-        //{
-        //    string productid = Convert.ToString(dataGridView1.SelectedRows[0].Cells["ProductId"].Value);
-        //    if (string.IsNullOrEmpty(productid))
-        //    {
-        //        MessageBox.Show("Select a row");
-        //        comboBoxCategory.Focus();
-        //        return false;
-        //    }
-        //    return true;
-        //}
 
         public void loadcategories()
         {

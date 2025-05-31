@@ -27,6 +27,7 @@ namespace Data_Access_Layer
             }
         }
 
+
         public int InsertCategory(string CategoryName, string Description)
         {
             try
@@ -39,7 +40,7 @@ namespace Data_Access_Layer
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Categoryname", CategoryName);
                     cmd.Parameters.AddWithValue("@Description", Description);
-                    SqlParameter returnParam = new SqlParameter();
+                    SqlParameter returnParam = new SqlParameter("@ReturnVal",SqlDbType.Int) ;
                     returnParam.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(returnParam);
                     cmd.ExecuteNonQuery();
@@ -47,7 +48,7 @@ namespace Data_Access_Layer
                     return result;
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw new Exception("Error while inserting " + ex.Message.ToString());
             }
@@ -121,13 +122,17 @@ namespace Data_Access_Layer
 
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@CategoryName", categoryName);
-                    int result = cmd.ExecuteNonQuery();
+                    int result =Convert.ToInt32(cmd.ExecuteScalar());
                     return result > 0;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception("Error while check the data existance " + ex.Message.ToString());
+            }
+            finally
+            {
+                con.Close();
             }
 
 
@@ -175,6 +180,31 @@ namespace Data_Access_Layer
                 
             }
         }
+
+        public int getCategoryNameByID(string categoryname)
+        {
+            try
+            {
+                connect();
+                using (SqlCommand cmd = new SqlCommand("Sp_Categories_GetIdByName", con))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CategoryName",categoryname);
+                    object result = cmd.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : -1 ;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while getting CategoryID " + ex.Message.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
 
         
             
