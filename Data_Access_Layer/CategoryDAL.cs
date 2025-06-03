@@ -181,7 +181,7 @@ namespace Data_Access_Layer
             }
         }
 
-        public int getCategoryNameByID(string categoryname)
+        public int getCategoryIdByName(string categoryname)
         {
             try
             {

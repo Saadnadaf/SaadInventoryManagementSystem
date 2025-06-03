@@ -96,7 +96,7 @@ namespace Business_Layer
                 int inserted = dal.InsertCategory(categoryname, description);
                 if (inserted > 0)
                 {
-                    return dal.getCategoryNameByID(categoryname);
+                    return dal.getCategoryIdByName(categoryname);
                 }
                 else if(inserted == -2)
                 {
@@ -110,7 +110,7 @@ namespace Business_Layer
              }
             else
             {
-                int categoryid = dal.getCategoryNameByID(categoryname);
+                int categoryid = dal.getCategoryIdByName(categoryname);
                 dal.UpdateCategory(categoryname, description, categoryid,cf.IsActive);
                 return categoryid;
             }
