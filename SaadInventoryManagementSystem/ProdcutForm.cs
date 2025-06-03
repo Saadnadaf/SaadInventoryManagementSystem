@@ -36,10 +36,11 @@ namespace SaadInventoryManagementSystem
                 return; 
             }
             string categoryname = comboBoxCategory.Text.Trim();
-            int categoryid = -1;
+            string description = DescriptiontextBox.Text.Trim();
+            int categoryid;
             try
             {
-                categoryid = cbll.GetorCreateCategoryID(categoryname);
+                categoryid = cbll.GetorCreateCategoryID(categoryname,description);
             }
             catch (Exception ex)
             {
@@ -50,6 +51,7 @@ namespace SaadInventoryManagementSystem
             {
                 CategoryName = categoryname,
                 CategoryId = categoryid,
+                Description = description,
                 ProductName = ProductNametextBox1.Text.Trim(),
                 Quantity = Convert.ToInt32(QuantiytextBox2.Text.Trim()),
                 Price = Convert.ToDecimal(PricetextBox3.Text.Trim())
@@ -91,11 +93,13 @@ namespace SaadInventoryManagementSystem
             }
 
             string categoryname = comboBoxCategory.Text.Trim();
-            int categoryid = cbll.GetorCreateCategoryID(categoryname);
+            string description = DescriptiontextBox.Text.Trim();
+            int categoryid = cbll.GetorCreateCategoryID(categoryname,description);
             int productid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ProductId"].Value);
             ProductFormProperties pf = new ProductFormProperties
             {
                 CategoryId = categoryid,
+                Description = description,
                 //CategoryId = Convert.ToInt32(comboBoxCategory.SelectedValue),
                 ProductName = ProductNametextBox1.Text.Trim(),
                 Quantity = Convert.ToInt32(QuantiytextBox2.Text.Trim()),
@@ -235,6 +239,7 @@ namespace SaadInventoryManagementSystem
         public void clearform()
         {
             ProductNametextBox1.Text = "";
+            DescriptiontextBox.Text = "";
             comboBoxCategory.SelectedIndex = -1;
             QuantiytextBox2.Text = "";
             PricetextBox3.Text = "";
@@ -259,6 +264,7 @@ namespace SaadInventoryManagementSystem
             QuantiytextBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();
             PricetextBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["Price"].Value.ToString();
             comboBoxCategory.Text = dataGridView1.Rows[e.RowIndex].Cells["CategoryName"].Value.ToString();
+            DescriptiontextBox.Text= dataGridView1.Rows[e.RowIndex].Cells["Description"].Value.ToString();
         }
 
         private void QuantiytextBox2_KeyPress(object sender, KeyPressEventArgs e)

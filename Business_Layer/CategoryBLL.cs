@@ -13,6 +13,7 @@ namespace Business_Layer
     public class CategoryBLL
     {
         CategoryDAL dal = new CategoryDAL();
+        CategoryfrmProperties cf = new CategoryfrmProperties();
 
         public bool dataexist(string categoryname)
         {
@@ -84,7 +85,7 @@ namespace Business_Layer
             }
         }
         
-        public int GetorCreateCategoryID(string categoryname,string description = "Added from productfrm")
+        public int GetorCreateCategoryID(string categoryname,string description)
         {
             if (string.IsNullOrEmpty(categoryname))
             {
@@ -99,7 +100,7 @@ namespace Business_Layer
                 }
                 else if(inserted == -2)
                 {
-                    throw new Exception("Category not active");
+                    throw new Exception("Category exists but not active");
                 }
                 
                 else
@@ -109,7 +110,9 @@ namespace Business_Layer
              }
             else
             {
-                return dal.getCategoryNameByID(categoryname);
+                int categoryid = dal.getCategoryNameByID(categoryname);
+                dal.UpdateCategory(categoryname, description, categoryid,cf.IsActive);
+                return categoryid;
             }
         }
 

@@ -37,8 +37,7 @@ namespace SaadInventoryManagementSystem
                 return;
             }
 
-            //allow combobox to take the input as well and store it in the category table from productform 
-
+            
             CategoryfrmProperties cf = new CategoryfrmProperties
             {
                 CategoryName = CategoryNametextBox1.Text.Trim(),
